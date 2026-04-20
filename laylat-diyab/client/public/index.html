@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>ليلة الذياب 🐺</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐺</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Amiri:wght@700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{--bg:#0b0b12;--bg2:#13131e;--bg3:#1c1c2e;--gold:#c8a84b;--gold2:#e5c96a;--red2:#e74c3c;--green2:#2ecc71;--blue2:#3498db;--purple:#9b59b6;--text:#f0e8d0;--muted:#7a6a4a;--muted2:#4a4060;--border:rgba(200,168,75,.18);--border2:rgba(200,168,75,.38)}
+html,body{height:100%;overflow:hidden;background:var(--bg)}
+body{font-family:'Cairo',sans-serif;color:var(--text);direction:rtl}
+.scr{display:none;flex-direction:column;height:100vh;overflow-y:auto;padding:12px;gap:8px}
+.scr.on{display:flex}
+.scr::-webkit-scrollbar{width:3px}.scr::-webkit-scrollbar-thumb{background:var(--border)}
+#toast{position:fixed;top:12px;left:50%;transform:translateX(-50%);background:var(--bg3);border:1px solid var(--gold);border-radius:9px;padding:7px 18px;font-size:13px;font-weight:700;color:var(--text);z-index:9999;opacity:0;pointer-events:none;transition:opacity .3s;white-space:nowrap;max-width:92vw;text-align:center}
+#toast.on{opacity:1}
+.ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:500;align-items:center;justify-content:center;padding:1rem}
+.ov.on{display:flex}
+.modal{background:var(--bg2);border:1px solid var(--gold);border-radius:16px;padding:1.5rem;max-width:320px;width:100%;text-align:center;animation:popIn .32s cubic-bezier(.175,.885,.32,1.275)}
+.modal.red-modal{border-color:var(--red2)}
+@keyframes popIn{from{transform:scale(.75);opacity:0}to{transform:scale(1);opacity:1}}
+.mico{font-size:3.5rem;display:block;margin-bottom:.5rem}
+.mtit{font-family:'Amiri',serif;font-size:1.65rem;color:var(--gold2);margin-bottom:.35rem}
+.mdsc{font-size:.82rem;color:var(--muted);line-height:1.75;margin-bottom:.9rem}
+.tpill{display:inline-block;font-size:.7rem;font-weight:700;padding:3px 12px;border-radius:20px;margin-bottom:.85rem}
+.wolf-pill{background:rgba(192,57,43,.2);color:var(--red2);border:1px solid var(--red2)}
+.vil-pill{background:rgba(46,204,113,.12);color:var(--green2);border:1px solid var(--green2)}
+.btn{width:100%;padding:.65rem;border:1px solid var(--border2);border-radius:9px;background:transparent;color:var(--gold2);font-family:'Cairo',sans-serif;font-size:.88rem;font-weight:700;cursor:pointer;transition:all .18s;margin-top:.4rem;display:flex;align-items:center;justify-content:center;gap:.4rem}
+.btn:hover{background:rgba(200,168,75,.1)}.btn:active{transform:scale(.97)}
+.btn.pri{background:linear-gradient(135deg,#b8942a,var(--gold2));color:#0b0b12;border:none}.btn.pri:hover{filter:brightness(1.07)}
+.btn.red{border-color:rgba(231,76,60,.4);color:var(--red2)}.btn.red:hover{background:rgba(231,76,60,.12)}
+.btn.grn{border-color:rgba(46,204,113,.4);color:var(--green2)}.btn.grn:hover{background:rgba(46,204,113,.1)}
+.btn.gray{border-color:rgba(255,255,255,.15);color:var(--muted)}.btn.gray:hover{background:rgba(255,255,255,.05)}
+.btn.sm{padding:.35rem .7rem;width:auto;font-size:.73rem;margin:0;border-radius:7px}
+.inp{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:9px;padding:.62rem .9rem;color:var(--text);font-family:'Cairo',sans-serif;font-size:.92rem;outline:none;transition:border-color .2s;margin-bottom:.85rem}
+.inp:focus{border-color:var(--gold)}.inp::placeholder{color:var(--muted2)}
+.lbl{font-size:.72rem;color:var(--muted);font-weight:700;letter-spacing:1px;margin-bottom:.3rem;display:block}
+.slbl{font-size:.68rem;color:var(--muted);font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:.4rem}
+
+/* ===== LOBBY ===== */
+#lobby{align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% -5%,rgba(200,168,75,.08) 0,transparent 55%)}
+.logo{text-align:center;margin-bottom:1.6rem}
+.wolf-ico{font-size:4.5rem;animation:pulse 3s ease-in-out infinite;display:block}
+@keyframes pulse{0%,100%{text-shadow:0 0 18px rgba(200,168,75,.3)}50%{text-shadow:0 0 40px rgba(200,168,75,.7)}}
+.logo-title{font-family:'Amiri',serif;font-size:2.4rem;font-weight:700;color:var(--gold2);letter-spacing:2px}
+.logo-sub{font-size:.72rem;color:var(--muted);letter-spacing:2px;margin-top:.2rem}
+.lcard{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:1.4rem;width:100%;max-width:400px}
+.tabs{display:flex;background:var(--bg3);border-radius:9px;padding:3px;margin-bottom:1.3rem;gap:3px}
+.tab{flex:1;padding:.52rem;border:none;border-radius:7px;background:transparent;color:var(--muted);font-family:'Cairo',sans-serif;font-size:.86rem;font-weight:700;cursor:pointer;transition:all .2s}
+.tab.on{background:var(--gold);color:#0b0b12}
+
+/* ===== WAITING ===== */
+#waiting{}
+.rbar{display:flex;justify-content:space-between;align-items:center;background:var(--bg2);border:1px solid var(--border);border-radius:11px;padding:.65rem .9rem}
+.codebox{text-align:center;cursor:pointer}
+.code-lbl{font-size:.62rem;color:var(--muted)}
+.code-val{font-size:1.35rem;font-weight:900;color:var(--gold2);letter-spacing:4px}
+.code-cp{font-size:.62rem;color:var(--muted)}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:.45rem}
+.pslot{background:var(--bg2);border:1px dashed rgba(200,168,75,.12);border-radius:9px;padding:.55rem .4rem;text-align:center;min-height:68px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.2rem}
+.pslot.f{border-style:solid;border-color:var(--border);background:var(--bg3)}.pslot.host{border-color:var(--gold)}.pslot.me{border-color:var(--blue2)}
+.pav{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.88rem;font-weight:700;color:#0b0b12}
+.pnm{font-size:.75rem;font-weight:700;color:var(--text)}.pbdg{font-size:.6rem;color:var(--gold)}.pmt{font-size:.7rem;color:rgba(200,168,75,.2)}
+.sbox{background:var(--bg2);border:1px solid var(--border);border-radius:11px;padding:.85rem}
+.rgrid{display:grid;grid-template-columns:1fr 1fr;gap:.45rem;margin-top:.5rem}
+.rtog{display:flex;align-items:center;justify-content:space-between;background:var(--bg3);border-radius:7px;padding:.42rem .6rem;gap:.3rem}
+.rinfo{display:flex;align-items:center;gap:.28rem}.rico{font-size:.88rem}.rnm{font-size:.72rem;font-weight:700;color:var(--text)}
+.tog{position:relative;width:32px;height:18px;flex-shrink:0}.tog input{opacity:0;width:0;height:0;position:absolute}
+.tsl{position:absolute;inset:0;background:var(--bg);border:1px solid rgba(200,168,75,.2);border-radius:18px;cursor:pointer;transition:.3s}
+.tsl:before{content:'';position:absolute;width:12px;height:12px;right:2px;top:2px;background:var(--muted);border-radius:50%;transition:.3s}
+.tog input:checked+.tsl{background:rgba(200,168,75,.18);border-color:var(--gold)}.tog input:checked+.tsl:before{background:var(--gold);transform:translateX(-14px)}
+.crow{display:flex;align-items:center;justify-content:space-between;background:var(--bg3);border-radius:7px;padding:.45rem .65rem;margin-top:.5rem}
+.clbl{font-size:.75rem;font-weight:700;color:var(--text)}.cctrl{display:flex;align-items:center;gap:.4rem}
+.cbtn{width:22px;height:22px;border-radius:50%;border:1px solid var(--border);background:var(--bg2);color:var(--gold);font-size:.88rem;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:'Cairo',sans-serif;transition:all .18s}
+.cbtn:hover{background:var(--gold);color:#0b0b12}.cval{font-size:.95rem;font-weight:900;color:var(--gold2);min-width:16px;text-align:center}
+
+/* ===== CHIEF VOTE ===== */
+#cvote{}
+.cvhdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.6rem}
+.cvt{font-family:'Amiri',serif;font-size:1.55rem;color:var(--gold2)}.cvs{font-size:.75rem;color:var(--muted);line-height:1.5}
+.ccgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:.45rem}
+.ccard{background:var(--bg2);border:1px solid var(--border);border-radius:11px;padding:.8rem .5rem;text-align:center;cursor:pointer;transition:all .2s}
+.ccard:hover{border-color:var(--gold);transform:translateY(-2px)}.ccard.vd{border-color:var(--gold);background:rgba(200,168,75,.1)}.ccard.nv{border-color:var(--red2);background:rgba(192,57,43,.08)}
+.cvc{font-size:.66rem;font-weight:700;color:var(--gold);margin-top:.18rem}
+.cvbtns{display:flex;flex-direction:column;gap:.35rem;margin-top:.35rem}
+.cvbars-box{background:var(--bg2);border:1px solid var(--border);border-radius:9px;padding:.6rem .85rem}
+.cvbl{font-size:.66rem;color:var(--muted);font-weight:700;margin-bottom:.32rem}
+.cvbi{display:flex;align-items:center;gap:.4rem;margin-bottom:.28rem}
+.cvbn{font-size:.75rem;color:var(--text);min-width:50px}.cvbbar{height:8px;background:rgba(200,168,75,.1);border-radius:4px;flex:1;overflow:hidden}
+.cvbf{height:100%;background:var(--gold);border-radius:4px;transition:width .4s}.cvbnum{font-size:.7rem;color:var(--gold);min-width:16px;text-align:left}
+.tline{text-align:center;font-size:.75rem;color:var(--muted)}.tnum{font-weight:900;color:var(--gold2)}
+
+/* ===== GAME ===== */
+#game{padding:10px;gap:7px}
+.gtop{display:flex;gap:.45rem;align-items:center}
+.pbadge{flex:1;display:flex;align-items:center;gap:.38rem;background:var(--bg2);border:1px solid var(--border);border-radius:9px;padding:.5rem .75rem;font-size:.82rem;font-weight:700}
+.pdot{width:6px;height:6px;border-radius:50%;flex-shrink:0;animation:blink 1.2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.pday .pdot{background:var(--gold2)}.pnight .pdot{background:var(--purple)}.pvote .pdot{background:var(--red2)}
+.rnum{font-size:.68rem;color:var(--muted);margin-right:auto}
+.tbig{font-size:.88rem;font-weight:900;background:var(--bg3);border:1px solid var(--border);border-radius:7px;padding:.25rem .6rem;font-variant-numeric:tabular-nums;flex-shrink:0}
+.mybar{display:flex;align-items:center;gap:.5rem;background:var(--bg2);border:1px solid var(--border);border-radius:9px;padding:.45rem .75rem}
+.mrico{font-size:1.25rem;flex-shrink:0}.mrinf{flex:1;min-width:0}
+.mrnm{font-size:.78rem;font-weight:700;color:var(--gold2)}.mrdsc{font-size:.65rem;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cbdg{font-size:.65rem;color:var(--gold);background:rgba(200,168,75,.12);border:1px solid rgba(200,168,75,.25);border-radius:5px;padding:2px 6px;flex-shrink:0}
+.spkbar{display:flex;align-items:center;gap:.45rem;background:var(--bg2);border:1px solid var(--border);border-radius:9px;padding:.44rem .75rem}
+.spklbl{font-size:.7rem;color:var(--muted);flex-shrink:0}.spknm{font-size:.83rem;font-weight:700;color:var(--green2);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.spkbtns{display:flex;gap:.28rem;flex-shrink:0}
+
+/* VOTE PANEL */
+.vote-panel{background:rgba(231,76,60,.06);border:1px solid rgba(231,76,60,.3);border-radius:9px;padding:.65rem .8rem}
+.vp-title{font-size:.75rem;font-weight:700;color:var(--red2);margin-bottom:.5rem}
+.vote-target-box{background:var(--bg3);border:1px solid rgba(231,76,60,.3);border-radius:8px;padding:.5rem .7rem;margin-bottom:.45rem;display:flex;align-items:center;gap:.5rem}
+.vt-name{font-size:.85rem;font-weight:700;color:var(--text);flex:1}
+.vt-votes{font-size:.8rem;color:var(--red2);font-weight:700}
+.vote-btns{display:flex;gap:.4rem}
+.vbtn{flex:1;padding:.5rem .4rem;border-radius:8px;border:1px solid;font-family:'Cairo',sans-serif;font-size:.75rem;font-weight:700;cursor:pointer;transition:all .18s;text-align:center;line-height:1.35}
+.vbtn.confirm{background:rgba(231,76,60,.15);border-color:var(--red2);color:var(--red2)}.vbtn.confirm:hover{background:rgba(231,76,60,.28)}
+.vbtn.cancel{background:rgba(200,168,75,.1);border-color:var(--gold);color:var(--gold2)}.vbtn.cancel:hover{background:rgba(200,168,75,.2)}
+.vbtn.abstain{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12);color:var(--muted)}.vbtn.abstain:hover{background:rgba(255,255,255,.08)}
+
+/* PLAYERS GRID */
+.gpgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(95px,1fr));gap:.42rem}
+.gcard{background:var(--bg2);border:1px solid var(--border);border-radius:9px;padding:.5rem .38rem;text-align:center;cursor:pointer;transition:all .2s;position:relative;user-select:none}
+.gcard:hover:not(.eli):not(.nc){border-color:var(--gold);transform:translateY(-2px)}.gcard:active:not(.eli):not(.nc){transform:scale(.97)}
+.gcard.me{border-color:var(--blue2)}.gcard.voted{border-color:var(--red2);background:rgba(192,57,43,.08)}
+.gcard.eli{opacity:.3;filter:grayscale(1);cursor:not-allowed}.gcard.spk{border-color:var(--green2);background:rgba(46,204,113,.04)}
+.gcard.sil{border-color:rgba(231,76,60,.35)}.gca{width:32px;height:32px;border-radius:50%;margin:0 auto .28rem;display:flex;align-items:center;justify-content:center;font-size:.88rem;font-weight:700;color:#0b0b12}
+.gcn{font-size:.72rem;font-weight:700;color:var(--text);margin-bottom:.1rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gcr{font-size:.6rem;color:var(--muted)}.gcr.sr{color:var(--gold);font-weight:700}.gcr.wr{color:var(--red2);font-weight:700}.gcr.er{color:var(--red2)}
+.vm{position:absolute;top:-4px;left:-4px;background:var(--red2);color:#fff;font-size:.56rem;font-weight:700;padding:1px 4px;border-radius:7px}
+.cm{position:absolute;top:-4px;right:-4px;background:var(--gold);color:#0b0b12;font-size:.56rem;font-weight:700;padding:1px 4px;border-radius:7px}
+
+/* VOTE SUMMARY */
+.vbar{background:var(--bg2);border:1px solid var(--border);border-radius:9px;padding:.5rem .75rem}
+.vblbl{font-size:.66rem;color:var(--muted);font-weight:700;margin-bottom:.28rem}
+.vbchips{display:flex;flex-wrap:wrap;gap:.28rem}
+.vchip{font-size:.7rem;padding:.16rem .5rem;border-radius:6px;background:rgba(192,57,43,.14);border:1px solid rgba(231,76,60,.25);color:var(--red2);font-weight:700}
+
+/* NIGHT PANEL */
+.npanel{background:rgba(155,89,182,.07);border:1px solid rgba(155,89,182,.28);border-radius:9px;padding:.6rem .75rem}
+.nplbl{font-size:.72rem;color:#c39bd3;font-weight:700;margin-bottom:.45rem}
+.nplayers{display:flex;flex-wrap:wrap;gap:.35rem}
+.npbtn{background:var(--bg3);border:1px solid rgba(155,89,182,.28);border-radius:7px;padding:.33rem .6rem;color:#c39bd3;font-family:'Cairo',sans-serif;font-size:.72rem;font-weight:700;cursor:pointer;transition:all .2s}
+.npbtn:hover{background:rgba(155,89,182,.15)}.npbtn.sel{background:rgba(155,89,182,.25);border-color:var(--purple);color:#e8d5f5}
+
+/* BOTTOM PANEL */
+.bpanel{display:flex;gap:.45rem;height:182px;flex-shrink:0}
+.chatbox{flex:1;background:var(--bg2);border:1px solid var(--border);border-radius:11px;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+.chdr{padding:.38rem .65rem;border-bottom:1px solid var(--border);font-size:.68rem;color:var(--muted);font-weight:700;flex-shrink:0}
+.cmsgs{flex:1;overflow-y:auto;padding:.42rem;display:flex;flex-direction:column;gap:.2rem}
+.cmsgs::-webkit-scrollbar{width:2px}.cmsgs::-webkit-scrollbar-thumb{background:var(--border)}
+.cmsg{display:flex;gap:.25rem;align-items:flex-start}
+.cau{font-size:.66rem;font-weight:700;flex-shrink:0;white-space:nowrap}.ctxt{font-size:.68rem;color:var(--text);line-height:1.4;word-break:break-word}
+.cmsg.sy .ctxt{color:var(--muted);font-style:italic;font-size:.65rem}
+.cinrow{display:flex;gap:.28rem;padding:.38rem;border-top:1px solid var(--border);flex-shrink:0}
+.cinp{flex:1;background:var(--bg3);border:1px solid rgba(200,168,75,.1);border-radius:6px;padding:.3rem .55rem;color:var(--text);font-family:'Cairo',sans-serif;font-size:.73rem;outline:none;direction:rtl;min-width:0}
+.cinp:focus{border-color:var(--gold)}
+.csnd{background:var(--gold);border:none;border-radius:6px;width:26px;height:26px;cursor:pointer;color:#0b0b12;font-size:.7rem;display:flex;align-items:center;justify-content:center;font-weight:900;flex-shrink:0;transition:all .15s}
+.csnd:hover{background:var(--gold2)}
+.vpanel{width:115px;background:var(--bg2);border:1px solid var(--border);border-radius:11px;display:flex;flex-direction:column;overflow:hidden;flex-shrink:0}
+.vhdr{padding:.38rem .6rem;border-bottom:1px solid var(--border);font-size:.68rem;color:var(--muted);font-weight:700;flex-shrink:0}
+.vlist{flex:1;padding:.42rem;display:flex;flex-direction:column;gap:.25rem;overflow-y:auto}
+.vu{display:flex;align-items:center;gap:.28rem;padding:.2rem .35rem;border-radius:5px}
+.vu.ac{background:rgba(200,168,75,.07);border:1px solid rgba(200,168,75,.16)}.vu.mu{opacity:.5}
+.vdot{width:5px;height:5px;border-radius:50%;background:var(--muted2);flex-shrink:0}
+.vu.ac .vdot{background:var(--green2);animation:blink .8s ease-in-out infinite}.vu.mu .vdot{background:var(--red2)}
+.vnm{font-size:.66rem;color:var(--text);font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.marea{padding:.38rem;border-top:1px solid var(--border);flex-shrink:0}
+.mbtn{width:100%;padding:.33rem;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--muted);font-family:'Cairo',sans-serif;font-size:.66rem;font-weight:700;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:.22rem}
+.mbtn.on{background:rgba(192,57,43,.18);border-color:var(--red2);color:var(--red2)}
+
+/* GAME OVER */
+#gover{align-items:center;justify-content:center;text-align:center;gap:.9rem;background:radial-gradient(ellipse at 50% 30%,rgba(200,168,75,.07) 0,transparent 60%)}
+.goico{font-size:4.5rem;animation:pulse 2s ease-in-out infinite}
+.gotit{font-family:'Amiri',serif;font-size:2rem;color:var(--gold2)}
+.gomsg{font-size:.88rem;color:var(--muted);line-height:1.8}
+.gorgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:.45rem;width:100%;max-width:400px}
+.gorc{background:var(--bg2);border:1px solid var(--border);border-radius:9px;padding:.55rem;text-align:center}
+.gorc.wc{border-color:rgba(231,76,60,.35);background:rgba(192,57,43,.05)}
+.gorn{font-size:.75rem;font-weight:700;color:var(--text)}.gorr{font-size:.67rem;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<div id="toast"></div>
+
+<!-- ROLE REVEAL -->
+<div class="ov" id="rovOv">
+<div class="modal">
+  <span class="mico" id="rvIco">🐺</span>
+  <div class="mtit" id="rvTit">الذيب</div>
+  <div class="mdsc" id="rvDsc"></div>
+  <div class="tpill" id="rvTm">فريق الذياب</div>
+  <button class="btn pri" onclick="closeOv('rovOv')">فهمت! 👍</button>
+</div>
+</div>
+
+<!-- EXIT CONFIRM -->
+<div class="ov" id="exitOv">
+<div class="modal red-modal">
+  <span class="mico">🚪</span>
+  <div class="mtit">تخرج من اللعبة؟</div>
+  <div class="mdsc">إلا خرجت رح تولي خارج اللعبة وما تقدرش ترجع.</div>
+  <button class="btn red" onclick="doExit()">آه، خرجني</button>
+  <button class="btn" onclick="closeOv('exitOv')" style="margin-top:.3rem">لا، ارجع</button>
+</div>
+</div>
+
+<!-- DETECTIVE RESULT -->
+<div class="ov" id="detOv">
+<div class="modal">
+  <span class="mico" id="detIco">🔍</span>
+  <div class="mtit" id="detTit">نتيجة الكشف</div>
+  <div class="mdsc" id="detDsc"></div>
+  <button class="btn pri" onclick="closeOv('detOv')">حسناً</button>
+</div>
+</div>
+
+<!-- BLESSED CHOICE -->
+<div class="ov" id="blsOv">
+<div class="modal">
+  <span class="mico">😇</span>
+  <div class="mtit">اختار من يخرج معك</div>
+  <div class="mdsc">أنت الولد الصالح — اختار واحد يخرج معك من اللعبة</div>
+  <div id="blsPlrs" style="display:flex;flex-direction:column;gap:.35rem;max-height:180px;overflow-y:auto;margin-bottom:.4rem"></div>
+</div>
+</div>
+
+<!-- ===== LOBBY ===== -->
+<div class="scr on" id="lobby">
+<div class="logo">
+  <span class="wolf-ico">🐺</span>
+  <div class="logo-title">ليلة الذياب</div>
+  <div class="logo-sub">MAFIA DZIRIYA · لعبة جماعية</div>
+</div>
+<div class="lcard" style="margin:0 auto">
+  <div class="tabs">
+    <button class="tab on" onclick="swTab('c',this)">نشئ غرفة</button>
+    <button class="tab" onclick="swTab('j',this)">دخول غرفة</button>
+  </div>
+  <div id="tc">
+    <label class="lbl">اسمك في اللعبة</label>
+    <input class="inp" id="cNm" placeholder="أدخل اسمك..." maxlength="16"/>
+    <button class="btn pri" onclick="createRoom()">🔑 نشئ غرفة جديدة</button>
+  </div>
+  <div id="tj" style="display:none">
+    <label class="lbl">اسمك في اللعبة</label>
+    <input class="inp" id="jNm" placeholder="أدخل اسمك..." maxlength="16"/>
+    <label class="lbl">رمز الغرفة</label>
+    <input class="inp" id="jCd" placeholder="DZAB34" style="text-align:center;font-size:1.2rem;letter-spacing:4px;font-weight:900;text-transform:uppercase" maxlength="6"/>
+    <button class="btn pri" onclick="joinRoom()">🚪 دخول للغرفة</button>
+  </div>
+</div>
+<div style="margin-top:1rem;text-align:center;color:var(--muted);font-size:.7rem;line-height:2.3">🐺 الذيب · 🔕 ذيب التسكيت · 👨‍⚕️ الطبيب · 🔍 الشواف · 👴 شيخ القبيلة · 😇 الولد الصالح</div>
+</div>
+
+<!-- ===== WAITING ===== -->
+<div class="scr" id="waiting">
+<div class="rbar">
+  <div>
+    <div style="font-size:.92rem;font-weight:700;color:var(--text)">غرفة الانتظار</div>
+    <div style="font-size:.72rem;color:var(--muted)" id="pCnt">0/15 لاعبين</div>
+  </div>
+  <div style="display:flex;align-items:center;gap:.55rem">
+    <button class="btn sm red" onclick="G('exitOv').classList.add('on')">خروج</button>
+    <div class="codebox" onclick="copyCode()">
+      <div class="code-lbl">رمز الغرفة</div>
+      <div class="code-val" id="dCode">------</div>
+      <div class="code-cp">📋 انقر للنسخ</div>
+    </div>
+  </div>
+</div>
+<div class="slbl">اللاعبون (6 → 15)</div>
+<div class="pgrid" id="wPlrs"></div>
+<div id="hSet" style="display:none">
+  <div class="slbl" style="margin-top:.2rem">إعدادات الأدوار</div>
+  <div class="sbox">
+    <div class="crow">
+      <span class="clbl">🐺 عدد الذياب</span>
+      <div class="cctrl">
+        <button class="cbtn" onclick="chW(-1)">−</button>
+        <span class="cval" id="wCnt">2</span>
+        <button class="cbtn" onclick="chW(1)">+</button>
+      </div>
+    </div>
+    <div class="rgrid">
+      <div class="rtog"><div class="rinfo"><span class="rico">🔕</span><span class="rnm">ذيب التسكيت</span></div><label class="tog"><input type="checkbox" id="tSil" checked onchange="updSet()"><span class="tsl"></span></label></div>
+      <div class="rtog"><div class="rinfo"><span class="rico">👨‍⚕️</span><span class="rnm">الطبيب</span></div><label class="tog"><input type="checkbox" id="tDoc" checked onchange="updSet()"><span class="tsl"></span></label></div>
+      <div class="rtog"><div class="rinfo"><span class="rico">🔍</span><span class="rnm">الشواف</span></div><label class="tog"><input type="checkbox" id="tDet" checked onchange="updSet()"><span class="tsl"></span></label></div>
+      <div class="rtog"><div class="rinfo"><span class="rico">😇</span><span class="rnm">الولد الصالح</span></div><label class="tog"><input type="checkbox" id="tBls" checked onchange="updSet()"><span class="tsl"></span></label></div>
+      <div class="rtog"><div class="rinfo"><span class="rico">👴</span><span class="rnm">شيخ القبيلة</span></div><label class="tog"><input type="checkbox" id="tChf" checked onchange="updSet()"><span class="tsl"></span></label></div>
+    </div>
+  </div>
+  <button class="btn pri" onclick="startGame()" style="margin-top:.55rem">🐺 ابدأ اللعبة</button>
+</div>
+<div id="gMsg" style="display:none;text-align:center;padding:1rem;color:var(--muted);font-size:.85rem">⏳ في انتظار المضيف يبدأ اللعبة...</div>
+</div>
+
+<!-- ===== CHIEF VOTE ===== -->
+<div class="scr" id="cvote">
+<div class="cvhdr">
+  <div>
+    <div class="cvt">انتخاب شيخ القبيلة 👴</div>
+    <div class="cvs">الشيخ يقدر يكون أي دور · صوته = 3 أصوات في التصويت</div>
+  </div>
+  <button class="btn sm red" onclick="G('exitOv').classList.add('on')">خروج</button>
+</div>
+<div class="slbl">اختار الشيخ:</div>
+<div class="ccgrid" id="cGrid"></div>
+<div class="cvbars-box" style="margin-top:.5rem">
+  <div class="cvbl">الأصوات الحالية</div>
+  <div id="cvBars"><span style="font-size:.72rem;color:var(--muted2)">لا يوجد بعد</span></div>
+</div>
+<div class="tline" style="margin-top:.4rem">الوقت: <span class="tnum" id="cvTimer">0:45</span></div>
+<button class="btn sm pri" id="cvEndBtn" style="display:none;margin:.4rem auto 0" onclick="socket.emit('chief:end',{code:S.code})">إنهاء التصويت (مضيف)</button>
+</div>
+
+<!-- ===== GAME ===== -->
+<div class="scr" id="game">
+<div class="gtop">
+  <div class="pbadge pday" id="pBdg"><div class="pdot"></div><span id="pTxt">☀️ النهار</span><span class="rnum" id="rNum">جولة 1</span></div>
+  <div class="tbig" id="tBig" style="color:var(--gold)">1:00</div>
+  <button class="btn sm red" onclick="G('exitOv').classList.add('on')">خروج</button>
+</div>
+
+<!-- My role -->
+<div class="mybar">
+  <span class="mrico" id="mrIco">🧑</span>
+  <div class="mrinf"><div class="mrnm" id="mrNm">مدني</div><div class="mrdsc" id="mrDsc">صوّت واكشف الذياب</div></div>
+  <span class="cbdg" id="cBdg" style="display:none">👴 شيخ</span>
+</div>
+
+<!-- Speaker bar (day only) -->
+<div class="spkbar" id="spkBar">
+  <span class="spklbl">يتكلم:</span>
+  <span class="spknm" id="spkNm">—</span>
+  <div class="spkbtns">
+    <button class="btn sm" id="skipBtn" onclick="skipSpk()">⏭ تخطي</button>
+    <button class="btn sm grn" id="doneBtn" onclick="skipSpk()">✓ خلصت</button>
+  </div>
+</div>
+
+<!-- DAY VOTE PANEL -->
+<div class="vote-panel" id="votePanelBox" style="display:none">
+  <div class="vp-title">🗳️ صوّت — من هو الذيب؟</div>
+  <div id="voteTargetArea" style="min-height:40px">
+    <div style="font-size:.78rem;color:var(--muted);text-align:center;padding:.4rem">اضغط على لاعع تحتهم تصوت عليه ↓</div>
+  </div>
+  <div class="vote-btns" id="voteBtns" style="display:none">
+    <button class="vbtn confirm" onclick="confirmVote()">تبانلي هذا هو الذيب 🐺<br><span style="font-size:.65rem;opacity:.8">صوّت عليه</span></button>
+    <button class="vbtn cancel" onclick="cancelVote()">لالا بطلت<br><span style="font-size:.65rem;opacity:.8">إلغاء</span></button>
+    <button class="vbtn abstain" onclick="abstainVote()">مانفوطيش<br><span style="font-size:.65rem;opacity:.8">امتناع</span></button>
+  </div>
+  <div id="hostVoteEnd" style="display:none;margin-top:.4rem">
+    <button class="btn sm red" style="margin:0 auto" onclick="socket.emit('day:force_resolve',{code:S.code})">إنهاء التصويت الآن (مضيف)</button>
+  </div>
+</div>
+
+<!-- Night panel -->
+<div class="npanel" id="nPanel" style="display:none">
+  <div class="nplbl" id="nLbl">🌙 اختار هدفك الليلة:</div>
+  <div class="nplayers" id="nPlrs"></div>
+</div>
+
+<!-- Players grid -->
+<div class="gpgrid" id="gPlrs"></div>
+
+<!-- Vote summary -->
+<div class="vbar" id="vbarBox" style="display:none">
+  <div class="vblbl">الأصوات الحالية 🗳️</div>
+  <div class="vbchips" id="vChips"></div>
+</div>
+
+<!-- Bottom: chat + voice -->
+<div class="bpanel">
+  <div class="chatbox">
+    <div class="chdr">💬 قروب اللعبة</div>
+    <div class="cmsgs" id="chatMsgs">
+      <div class="cmsg sy"><span class="ctxt">🐺 مرحبا في ليلة الذياب!</span></div>
+    </div>
+    <div class="cinrow">
+      <input class="cinp" id="chatInp" placeholder="اكتب هنا..." maxlength="200"/>
+      <button class="csnd" onclick="sendChat()">↑</button>
+    </div>
+  </div>
+  <div class="vpanel">
+    <div class="vhdr">🎙️ الصوت</div>
+    <div class="vlist" id="vList"></div>
+    <div class="marea">
+      <button class="mbtn" id="mBtn" onclick="togMic()">
+        <span id="mIco">🔇</span><span id="mTxt">مكتوم</span>
+      </button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ===== GAME OVER ===== -->
+<div class="scr" id="gover">
+  <span class="goico" id="goIco">🎉</span>
+  <div class="gotit" id="goTit">انتهت اللعبة</div>
+  <div class="gomsg" id="goMsg"></div>
+  <div class="slbl" style="margin-top:.4rem">الأدوار كانت:</div>
+  <div class="gorgrid" id="goRoles"></div>
+  <button class="btn pri" style="max-width:260px;margin-top:.5rem" onclick="doExit()">🔄 لعبة جديدة</button>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+const G = id => document.getElementById(id);
+const ROLES = {
+  wolf:     {n:'الذيب',         i:'🐺', t:'wolf', tl:'فريق الذياب',  d:'قتل القرويين ليلاً — الكذب عليهم نهاراً'},
+  silencer: {n:'ذيب التسكيت',  i:'🔕', t:'wolf', tl:'فريق الذياب',  d:'تسكّت لاعع كل ليلة — يخسر دوره في الكلام'},
+  doctor:   {n:'الطبيب',        i:'👨‍⚕️', t:'vil',  tl:'فريق القرية', d:'تنقذ لاعع من القتل كل ليلة'},
+  detective:{n:'الشواف',        i:'🔍', t:'vil',  tl:'فريق القرية', d:'تكشف هوية لاعع كل ليلة'},
+  chief:    {n:'شيخ القبيلة',  i:'👴', t:'vil',  tl:'فريق القرية', d:'صوتك يساوي 3 أصوات عند التصويت'},
+  blessed:  {n:'الولد الصالح', i:'😇', t:'vil',  tl:'فريق القرية', d:'إذا طردوك تختار واحد آخر يخرج معك'},
+  civilian: {n:'مدني',          i:'🧑', t:'vil',  tl:'فريق القرية', d:'صوّت واكشف الذياب بالكلام والمنطق'}
+};
+
+let S = {
+  myName:'', myId:null, isHost:false, code:'', wolves:2,
+  myRole:null, myIsChief:false, phase:'lobby', micOn:false,
+  nightVote:null, pendingVote:null, confirmedVote:null,
+  players:[], speakerId:null, roleShown:false
+};
+
+const socket = io();
+
+let toastTO;
+function toast(m){clearTimeout(toastTO);const e=G('toast');e.textContent=m;e.classList.add('on');toastTO=setTimeout(()=>e.classList.remove('on'),2800)}
+function show(id){document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));G(id).classList.add('on')}
+function closeOv(id){G(id).classList.remove('on')}
+
+function swTab(t,el){document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));el.classList.add('on');G('tc').style.display=t==='c'?'':'none';G('tj').style.display=t==='j'?'':'none'}
+
+function createRoom(){
+  const n=G('cNm').value.trim();if(!n){toast('❌ أدخل اسمك');return}
+  S.myName=n;socket.emit('room:create',{playerName:n,settings:getSettings()});
+}
+
+function joinRoom(){
+  const n=G('jNm').value.trim(),c=G('jCd').value.trim().toUpperCase();
+  if(!n){toast('❌ أدخل اسمك');return}
+  if(!c||c.length<4){toast('❌ رمز غلط');return}
+  S.myName=n;S.code=c;socket.emit('room:join',{code:c,playerName:n});
+}
+
+function getSettings(){return{wolves:S.wolves,silencer:G('tSil')?.checked??true,doctor:G('tDoc')?.checked??true,detective:G('tDet')?.checked??true,blessed:G('tBls')?.checked??true,chief:G('tChf')?.checked??true}}
+function updSet(){if(S.isHost)socket.emit('settings:update',{code:S.code,settings:getSettings()})}
+function chW(d){S.wolves=Math.max(1,Math.min(5,S.wolves+d));G('wCnt').textContent=S.wolves;updSet()}
+function copyCode(){navigator.clipboard?.writeText(S.code).catch(()=>{});toast('📋 تم نسخ الرمز: '+S.code)}
+function startGame(){socket.emit('game:start',{code:S.code})}
+
+// ─── CHIEF VOTE ────────────────────────────────────────────────────
+function renderCGrid(players){
+  const g=G('cGrid');g.innerHTML='';
+  players.forEach(p=>{
+    const vd=S.chiefMyVote===p.id;
+    const el=document.createElement('div');
+    el.className='ccard'+(vd?' vd':'');
+    el.innerHTML=`<div class="pav" style="background:${p.color};margin:0 auto .28rem;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.88rem;font-weight:700;color:#0b0b12">${p.name[0]}</div><div class="pnm">${p.name}</div><div class="cvc">${p.chiefVotes||0} صوت</div>`;
+    const btns=document.createElement('div');btns.className='cvbtns';
+    const b1=document.createElement('button');b1.className='btn sm pri';b1.style.fontSize='.68rem';b1.textContent='نفوطي عليه باش يولي تبون 👴';
+    const b2=document.createElement('button');b2.className='btn sm red';b2.style.fontSize='.68rem';b2.textContent='أودي صي صي — تخاف هو الذيب 🐺';
+    b1.onclick=()=>{socket.emit('chief:vote',{code:S.code,targetId:p.id});S.chiefMyVote=p.id;renderCGrid(players)};
+    b2.onclick=()=>{if(S.chiefMyVote===p.id){socket.emit('chief:vote',{code:S.code,targetId:p.id});S.chiefMyVote=null;renderCGrid(players)}else toast('ما صوتتش عليه أصلاً')};
+    btns.appendChild(b1);btns.appendChild(b2);el.appendChild(btns);
+    g.appendChild(el);
+  });
+  renderCVBars(players);
+}
+
+function renderCVBars(players){
+  const c=G('cvBars');c.innerHTML='';
+  const wv=players.filter(p=>(p.chiefVotes||0)>0).sort((a,b)=>b.chiefVotes-a.chiefVotes);
+  if(!wv.length){c.innerHTML='<span style="font-size:.72rem;color:var(--muted2)">لا يوجد بعد</span>';return}
+  const mx=Math.max(...wv.map(p=>p.chiefVotes));
+  wv.forEach(p=>{const pct=Math.round(p.chiefVotes/mx*100);c.innerHTML+=`<div class="cvbi"><span class="cvbn">${p.name}</span><div class="cvbbar"><div class="cvbf" style="width:${pct}%"></div></div><span class="cvbnum">${p.chiefVotes}</span></div>`});
+}
+
+// ─── GAME RENDER ────────────────────────────────────────────────────
+function renderGame(room){
+  if(!room)return;
+  S.players=room.players;
+  const phase=room.phase;
+  const isWolf=S.myRole==='wolf'||S.myRole==='silencer';
+
+  // phase badge
+  G('pBdg').className='pbadge '+(phase==='night'?'pnight':phase==='day_vote'?'pvote':'pday');
+  G('pTxt').textContent=phase==='night'?'🌙 الليل':phase==='day_vote'?'🗳️ التصويت':'☀️ النهار';
+  G('rNum').textContent='جولة '+(room.round||1);
+
+  // speaker bar
+  const spkBar=G('spkBar');
+  if(phase==='day'){
+    spkBar.style.display='';
+    const spk=room.players.find(p=>p.id===room.speakerId);
+    if(spk)G('spkNm').textContent=spk.silenced?spk.name+' 🔕':spk.name;
+    // only speaker or host can skip
+    const canSkip=room.myId===room.speakerId||room.myId===room.hostId;
+    G('skipBtn').style.display=canSkip?'':'none';
+    G('doneBtn').style.display=canSkip&&room.myId===room.speakerId?'':'none';
+  }else{spkBar.style.display='none'}
+
+  // vote panel
+  const vpBox=G('votePanelBox');
+  const vbarBox=G('vbarBox');
+  if(phase==='day_vote'){
+    vpBox.style.display='';vbarBox.style.display='';
+    G('hostVoteEnd').style.display=room.myId===room.hostId?'':'none';
+    renderVoteTarget(room);
+    renderVoteChips(room);
+  }else{vpBox.style.display='none';vbarBox.style.display='none'}
+
+  // night panel
+  const nPanel=G('nPanel');
+  if(phase==='night'&&(isWolf||S.myRole==='doctor'||S.myRole==='detective')){
+    nPanel.style.display='';renderNightPanel(room);
+  }else nPanel.style.display='none';
+
+  // players
+  const pg=G('gPlrs');pg.innerHTML='';
+  room.players.forEach(p=>{
+    const isSelf=p.id===room.myId;
+    const showRole=isSelf||p.eliminated||(phase==='night'&&isWolf&&(p.role==='wolf'||p.role==='silencer'));
+    const isSpeaking=phase==='day'&&p.id===room.speakerId&&!p.eliminated;
+    const el=document.createElement('div');
+    el.className='gcard'+(p.eliminated?' eli':'')+(isSelf?' me nc':'')+(S.confirmedVote===p.id?' voted':'')+(isSpeaking?' spk':'')+(p.silenced&&!p.eliminated?' sil':'');
+    const ri=ROLES[p.role]||ROLES.civilian;
+    const rc=showRole?(isSelf?'sr':isWolf&&(p.role==='wolf'||p.role==='silencer')?'wr':'er'):'';
+    el.innerHTML=(p.votes>0&&phase==='day_vote'?`<div class="vm">${p.votes}</div>`:'')+
+      (p.isChief?`<div class="cm">👴</div>`:'')+
+      `<div class="gca" style="background:${p.color}">${p.name[0]}</div>`+
+      `<div class="gcn">${p.name}</div>`+
+      `<div class="gcr ${rc}">${showRole?ri.i+' '+ri.n:'❓'}</div>`;
+    if(!p.eliminated&&!isSelf&&phase==='day_vote'){
+      el.onclick=()=>selectVoteTarget(p,room);
+    }
+    pg.appendChild(el);
+  });
+  renderVoiceList(room);
+}
+
+function renderVoteTarget(room){
+  const area=G('voteTargetArea');const btns=G('voteBtns');
+  if(S.pendingVote){
+    const p=room.players.find(x=>x.id===S.pendingVote);
+    if(p){
+      area.innerHTML=`<div class="vote-target-box"><div class="vt-name">${p.name}</div><div class="vt-votes">${p.votes} 🗳️</div></div>`;
+      btns.style.display='flex';return;
+    }
+  }
+  area.innerHTML='<div style="font-size:.78rem;color:var(--muted);text-align:center;padding:.4rem">اضغط على لاعع تحتهم تصوت عليه ↓</div>';
+  btns.style.display='none';
+}
+
+function renderVoteChips(room){
+  const active=room.players.filter(p=>!p.eliminated&&(p.votes||0)>0).sort((a,b)=>b.votes-a.votes);
+  const c=G('vChips');
+  if(!active.length){c.innerHTML='<span style="font-size:.7rem;color:var(--muted2)">لا يوجد بعد</span>';return}
+  c.innerHTML=active.map(p=>`<span class="vchip">${p.name}: ${p.votes}</span>`).join('');
+}
+
+function selectVoteTarget(p,room){
+  S.pendingVote=p.id;renderVoteTarget(room);
+  toast('اختيار: '+p.name+' — اضغط "تبانلي" للتأكيد');
+}
+
+function confirmVote(){
+  if(!S.pendingVote)return;
+  socket.emit('day:vote',{code:S.code,targetId:S.pendingVote});
+  S.confirmedVote=S.pendingVote;S.pendingVote=null;
+  toast('✅ تم التصويت!');
+}
+
+function cancelVote(){
+  if(S.confirmedVote){socket.emit('day:vote',{code:S.code,targetId:S.confirmedVote});}
+  S.pendingVote=null;S.confirmedVote=null;
+  G('voteBtns').style.display='none';
+  G('voteTargetArea').innerHTML='<div style="font-size:.78rem;color:var(--muted);text-align:center;padding:.4rem">اضغط على لاعع تحتهم تصوت عليه ↓</div>';
+  toast('❌ تم إلغاء التصويت');
+}
+
+function abstainVote(){
+  if(S.confirmedVote){socket.emit('day:abstain',{code:S.code});}
+  S.pendingVote=null;S.confirmedVote=null;
+  G('voteBtns').style.display='none';
+  G('voteTargetArea').innerHTML='<div style="font-size:.78rem;color:var(--muted);text-align:center;padding:.4rem">اخترت الامتناع عن التصويت</div>';
+  toast('🤐 مانفوطيش — امتناع');
+}
+
+function renderNightPanel(room){
+  const nl=G('nLbl'),np=G('nPlrs');np.innerHTML='';
+  if(S.myRole==='wolf'||S.myRole==='silencer')nl.textContent='🐺 اختار من تهاجم الليلة:';
+  else if(S.myRole==='doctor')nl.textContent='💊 اختار من تنقذ الليلة:';
+  else nl.textContent='🔍 اختار من تكشف هويته:';
+  room.players.filter(p=>!p.eliminated&&p.id!==room.myId).forEach(p=>{
+    const b=document.createElement('button');b.className='npbtn'+(S.nightVote===p.id?' sel':'');
+    b.textContent=p.name;
+    b.onclick=()=>{S.nightVote=p.id;socket.emit('night:vote',{code:S.code,targetId:p.id});renderNightPanel(room);toast('✓ اخترت '+p.name);
+      if(S.myRole==='detective'){setTimeout(()=>{const wf=p.role==='wolf'||p.role==='silencer';G('detIco').textContent=wf?'🐺':'✅';G('detTit').textContent=wf?'ذيب! 🐺':'مدني ✅';G('detDsc').textContent=p.name+(wf?' هو ذيب — تنبّه!':' مدني بريء');G('detOv').classList.add('on')},400)}
+    };
+    np.appendChild(b);
+  });
+}
+
+function renderVoiceList(room){
+  const vl=G('vList');vl.innerHTML='';
+  room.players.filter(p=>!p.eliminated).forEach(p=>{
+    const isSpk=p.id===room.speakerId&&room.phase==='day';
+    const d=document.createElement('div');d.className='vu'+(isSpk?' ac':'')+(p.silenced?' mu':'');
+    d.innerHTML=`<div class="vdot"></div><span class="vnm">${p.name}</span>`;vl.appendChild(d);
+  });
+}
+
+function skipSpk(){socket.emit('speaker:skip',{code:S.code})}
+
+function updateTimer(sec){
+  const m=Math.floor(sec/60),s=sec%60;
+  G('tBig').textContent=m+':'+String(s).padStart(2,'0');
+  G('tBig').style.color=sec<15?'var(--red2)':sec<30?'var(--gold2)':'var(--gold)';
+  if(G('cvTimer')&&S.phase==='chief_vote')G('cvTimer').textContent='0:'+String(Math.min(sec,59)).padStart(2,'0');
+}
+
+function togMic(){S.micOn=!S.micOn;G('mBtn').className='mbtn'+(S.micOn?' on':'');G('mIco').textContent=S.micOn?'🎙️':'🔇';G('mTxt').textContent=S.micOn?'يتحدث':'مكتوم';toast(S.micOn?'🎙️ المايك شغال':'🔇 المايك مكتوم')}
+
+function sendChat(){
+  const i=G('chatInp'),t=i.value.trim();if(!t)return;
+  socket.emit('chat:message',{code:S.code,text:t});i.value='';
+}
+
+function addMsg(a,t,c,sy=false){
+  const m=G('chatMsgs'),d=document.createElement('div');d.className='cmsg'+(sy?' sy':'');
+  d.innerHTML=sy?`<span class="ctxt">${t}</span>`:`<span class="cau" style="color:${c||'var(--gold)'}">${a}:</span><span class="ctxt">${t}</span>`;
+  m.appendChild(d);m.scrollTop=m.scrollHeight;
+}
+
+function showReveal(rk,isChief){
+  const r=ROLES[rk]||ROLES.civilian;
+  G('rvIco').textContent=r.i;G('rvTit').textContent=r.n+(isChief?' + 👴':'');
+  G('rvDsc').textContent=r.d+(isChief?'\nوأنت أيضاً شيخ القبيلة — صوتك يساوي 3!':'');
+  const tp=G('rvTm');tp.textContent=r.tl;tp.className='tpill '+(r.t==='wolf'?'wolf-pill':'vil-pill');
+  G('rovOv').classList.add('on');
+}
+
+function doExit(){
+  closeOv('exitOv');socket.emit('room:leave',{code:S.code});
+  S={myName:'',myId:null,isHost:false,code:'',wolves:2,myRole:null,myIsChief:false,phase:'lobby',micOn:false,nightVote:null,pendingVote:null,confirmedVote:null,players:[],speakerId:null,roleShown:false};
+  G('chatMsgs').innerHTML='<div class="cmsg sy"><span class="ctxt">🐺 مرحبا في ليلة الذياب!</span></div>';
+  G('cNm').value='';G('jNm').value='';G('jCd').value='';
+  show('lobby');toast('👋 خرجت من اللعبة');
+}
+
+// ─── SOCKET EVENTS ────────────────────────────────────────────────────
+socket.on('error',({msg})=>toast(msg));
+
+socket.on('room:created',({code,playerId})=>{
+  S.code=code;S.myId=playerId;S.isHost=true;
+  G('dCode').textContent=code;G('hSet').style.display='';G('gMsg').style.display='none';
+  show('waiting');toast('✅ الغرفة جاهزة! الرمز: '+code);
+});
+
+socket.on('room:joined',({code,playerId})=>{
+  S.code=code;S.myId=playerId;S.isHost=false;
+  G('dCode').textContent=code;G('hSet').style.display='none';G('gMsg').style.display='';
+  show('waiting');toast('✅ دخلت غرفة '+code);
+});
+
+socket.on('room:update',(room)=>{
+  S.phase=room.phase;
+  if(room.phase==='lobby'){
+    const max=Math.min(15,Math.max(8,room.players.length+2));
+    const g=G('wPlrs');g.innerHTML='';
+    for(let i=0;i<max;i++){
+      const p=room.players[i];const el=document.createElement('div');
+      el.className='pslot'+(p?' f':'')+(p?.isHost?' host':'')+(p?.id===room.myId?' me':'');
+      if(p)el.innerHTML=`<div class="pav" style="background:${p.color}">${p.name[0]}</div><div class="pnm">${p.name}</div><div class="pbdg">${p.isHost?'👑 مضيف':'✓ جاهز'}</div>`;
+      else el.innerHTML=`<div class="pmt">مقعد فارغ</div>`;
+      g.appendChild(el);
+    }
+    G('pCnt').textContent=room.players.length+'/15 لاعبين';
+    if(room.myId===room.hostId){G('hSet').style.display='';G('gMsg').style.display='none';}
+  }
+  else if(room.phase==='chief_vote'){
+    S.chiefMyVote=S.chiefMyVote||null;
+    renderCGrid(room.players);
+    if(room.myId===room.hostId)G('cvEndBtn').style.display='';
+    show('cvote');
+  }
+  else if(room.phase==='day'||room.phase==='day_vote'||room.phase==='night'){
+    if(!S.roleShown&&room.myRole){
+      S.roleShown=true;S.myRole=room.myRole;S.myIsChief=room.myIsChief;
+      const r=ROLES[room.myRole]||ROLES.civilian;
+      G('mrIco').textContent=r.i;G('mrNm').textContent=r.n;G('mrDsc').textContent=r.d;
+      G('cBdg').style.display=room.myIsChief?'':'none';
+      show('game');
+      setTimeout(()=>showReveal(room.myRole,room.myIsChief),400);
+    } else if(document.getElementById('game').classList.contains('on')===false){
+      show('game');
+    }
+    if(room.phase!==S.phase){
+      S.phase=room.phase;
+      if(room.phase==='day_vote'){S.pendingVote=null;}
+      if(room.phase==='day'){S.confirmedVote=null;S.pendingVote=null;S.nightVote=null;}
+    }
+    S.speakerId=room.speakerId;
+    renderGame({...room,myId:S.myId,hostId:room.hostId});
+  }
+});
+
+socket.on('phase:change',({phase,round})=>{
+  S.phase=phase;
+  if(phase==='day'){S.confirmedVote=null;S.pendingVote=null;S.nightVote=null;}
+  if(phase==='day_vote'){S.pendingVote=null;}
+});
+
+socket.on('speaker:change',({speakerId,speakerName,silenced})=>{
+  S.speakerId=speakerId;
+  if(G('spkNm'))G('spkNm').textContent=silenced?speakerName+' 🔕':speakerName;
+});
+
+socket.on('timer:tick',(sec)=>updateTimer(sec));
+
+socket.on('chat:message',({author,text,color})=>addMsg(author,text,color));
+socket.on('chat:system',(msg)=>{if(typeof msg==='string')addMsg('',msg,'',true)});
+
+socket.on('player:eliminated',({playerName,role})=>{
+  const r=ROLES[role]||ROLES.civilian;
+  addMsg('',`⚰️ ${playerName} خرج — كان ${r.i} ${r.n}`,'',true);
+  toast('⚰️ '+playerName+' خرج!');
+});
+
+socket.on('detective:result',({targetName,isWolf})=>{
+  G('detIco').textContent=isWolf?'🐺':'✅';
+  G('detTit').textContent=isWolf?'ذيب! 🐺':'مدني ✅';
+  G('detDsc').textContent=targetName+(isWolf?' هو ذيب — كن حذراً!':' مدني بريء');
+  G('detOv').classList.add('on');
+});
+
+socket.on('blessed:choose',({players})=>{
+  const bp=G('blsPlrs');bp.innerHTML='';
+  players.forEach(p=>{
+    const b=document.createElement('button');b.className='btn red';b.style.marginTop='.25rem';b.textContent=p.name;
+    b.onclick=()=>{socket.emit('blessed:choice',{code:S.code,targetId:p.id});closeOv('blsOv');};
+    bp.appendChild(b);
+  });
+  G('blsOv').classList.add('on');
+});
+
+socket.on('game:over',({winner,message,players})=>{
+  G('goIco').textContent=winner==='village'?'🎉':'🐺';
+  G('goTit').textContent=winner==='village'?'فازت القرية!':'فاز الذياب!';
+  G('goMsg').textContent=message;
+  const gr=G('goRoles');gr.innerHTML='';
+  (players||S.players).forEach(p=>{
+    const r=ROLES[p.role]||ROLES.civilian;
+    const d=document.createElement('div');d.className='gorc'+(p.role==='wolf'||p.role==='silencer'?' wc':'');
+    d.innerHTML=`<div style="font-size:1.4rem;margin-bottom:.15rem">${r.i}</div><div class="gorn">${p.name}</div><div class="gorr">${r.n}${p.isChief?' + 👴':''}</div>`;
+    gr.appendChild(d);
+  });
+  show('gover');
+});
+
+// inputs
+G('chatInp').addEventListener('keydown',e=>{if(e.key==='Enter')sendChat()});
+G('jCd').addEventListener('input',e=>{e.target.value=e.target.value.toUpperCase()});
+G('cNm').addEventListener('keydown',e=>{if(e.key==='Enter')createRoom()});
+G('jCd').addEventListener('keydown',e=>{if(e.key==='Enter')joinRoom()});
+</script>
+</body>
+</html>
